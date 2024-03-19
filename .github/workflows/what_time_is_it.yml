@@ -3,6 +3,6 @@ run-name: Testing my GitHub Actions 🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
-    runs-on: fedora-latest
+    runs-on: ubuntu-latest
     steps:
       - run: date
