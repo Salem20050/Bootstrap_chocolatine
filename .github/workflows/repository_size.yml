@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: ripo
 run-name: Testing my first GitHub Actions 🚀
 on: [push]
 jobs:
