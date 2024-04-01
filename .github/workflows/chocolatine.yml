@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: check.sh $(pwd) $(pwd)
-      # - if: ${{ fromJson(steps.check_coding_style.outputs.output).code }} != 0
-      #   run: echo ::error ::$(cat coding-style-reports.log)
-      # - if: ${{ fromJson(steps.check_coding_style.outputs.output).code }} == 0
-      #   run: exit 1
+      - if: ${{ fromJson(steps.check_coding_style.outputs.output).code }} != 0
+        run: echo ::error ::$(cat coding-style-reports.log)
+      - if: ${{ fromJson(steps.check_coding_style.outputs.output).code }} == 0
+        run: exit 1
   check_program_compilation:
     runs-on: ubuntu-latest
     container:
