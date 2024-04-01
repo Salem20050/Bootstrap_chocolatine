@@ -1,0 +1,40 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check_coding_style:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: my-branch
+      - run: check.sh $(pwd) $(pwd)
+      - if: ${{ fromJson(steps.check_coding_style.outputs.output).code }} != 0
+        run: echo ::error ::$(cat coding-style-reports.log)
+      - if: ${{ fromJson(steps.check_coding_style.outputs.output).code }} == 0
+        run: exit 1
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+      - uses: actions/checkout@v2
+      - run: make
+      - run: make clean
+  run_tests:
+    runs-on: ubuntu-latest
+      container:
+        image: epitechcontent/epitest-docker
+      steps:
+      - uses: actions/checkout@v2
+      - runs: make tests_run
+  push_to_mirror:
+    
