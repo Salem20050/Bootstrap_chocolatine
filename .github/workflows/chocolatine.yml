@@ -38,6 +38,9 @@ jobs:
     if: github.event_name == 'push'
     needs: [check_coding_style, run_tests]
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
           target_repo_url:
