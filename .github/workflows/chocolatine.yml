@@ -22,7 +22,7 @@ jobs:
           while IFS= read -r line; do
             fields=($(echo "$line" | cut -d':' -f1-));
             echo "::error title=Coding Style Error file=${fields[0]} line=${fields[1]}::${fields[2]}"
-          done < /coding-style-reports.log
+          done < coding-style-reports.log
   check_program_compilation:
     runs-on: ubuntu-latest
     container:
