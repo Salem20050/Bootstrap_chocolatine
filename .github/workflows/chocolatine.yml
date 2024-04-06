@@ -18,8 +18,11 @@ jobs:
       - name: Run Coding Style Checker
         run: check.sh $(pwd) $(pwd)
       - name: Display Coding Style Errors
-        if: ${{ steps.check_coding_style.outcome == 'failure' }}
-        run: echo ::error ::$(cat coding-style-reports.log)
+      run: |
+        while IFS= read -r line; do
+          fields=($(echo "$line" | cut -d':' -f1-));
+          echo "::error title=Coding Style Error file=${fields[0]} line=${fields[1]}::${fields[2]}"
+        done < /tmp/coding-style-reports.log
   check_program_compilation:
     runs-on: ubuntu-latest
     container:
