@@ -3,6 +3,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+env:
+  MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-1-chocolatine-raoufi.kora.git"
+  EXECUTABLE: "mysh"
 
 jobs:
   check_coding_style:
